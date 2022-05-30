@@ -1,0 +1,31 @@
+{
+    "name": "Node",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "node",
+    "workspaceFolder": "/usr/local/app",
+    "extensions":[
+        "dbaeumer.vscode-eslint",
+        "mhutchie.git-graph"
+    ],
+    "settings": {
+        "files.insertFinalNewline": true,
+        "files.trimTrailingWhitespace": true,
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.profiles.linux": {
+            "bash": {
+                "path": "/bin/bash"
+            }
+        },
+        "[json]": {
+            "editor.tabSize": 4
+        },
+        "[javascript]":{
+            "editor.formatOnSave": true,
+            "editor.tabSize": 2
+        },
+        "[javascriptreact]":{
+            "editor.formatOnSave": true,
+            "editor.tabSize": 2
+        }
+    }
+}
