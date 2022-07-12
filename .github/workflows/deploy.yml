@@ -13,7 +13,6 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -29,6 +28,11 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
         id: amazon-ecr-login
 
+      - name: Determine image tag
+        id: determine-image-tag
+        run: |
+          echo ::set-output name=image-tag::$(echo ${{ github.sha }} | cut -c -7)
+
       - name: Build and push image
         env:
           ECR_REGISTRY: ${{ steps.amazon-ecr-login.outputs.registry }}
@@ -36,6 +40,6 @@ jobs:
           docker build . \
             --target prod-runner \
             -t $ECR_REGISTRY/$ECR_REPOSITORY:latest \
-            -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+            -t $ECR_REGISTRY/$ECR_REPOSITORY:${{ steps.determine-imae-tag.outputs.image-tag }}
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{ steps.determine-imae-tag.outputs.image-tag }}
