@@ -18,7 +18,7 @@ RUN yarn install && yarn build
 
 # 本番実行環境
 
-FROM node:18-5-alpine AS prod-runner
+FROM node:18.5-alpine AS prod-runner
 
 ENV NODE_ENV=production
 
