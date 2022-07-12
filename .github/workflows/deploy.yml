@@ -31,7 +31,7 @@ jobs:
       - name: Determine image tag
         id: determine-image-tag
         run: |
-          echo ::set-output name=image-tag::$(echo ${{ github.sha }} | cut -c -7)
+          echo ::set-output name=image_tag::$(echo ${{ github.sha }} | cut -c -7)
 
       - name: Build and push image
         env:
@@ -40,6 +40,6 @@ jobs:
           docker build . \
             --target prod-runner \
             -t $ECR_REGISTRY/$ECR_REPOSITORY:latest \
-            -t $ECR_REGISTRY/$ECR_REPOSITORY:${{ steps.determine-imae-tag.outputs.image-tag }}
+            -t $ECR_REGISTRY/$ECR_REPOSITORY:${{ steps.determine-image-tag.outputs.image_tag }}
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{ steps.determine-imae-tag.outputs.image-tag }}
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{ steps.determine-image-tag.outputs.image_tag }}
