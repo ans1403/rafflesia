@@ -24,10 +24,10 @@ ENV NODE_ENV=production
 
 WORKDIR /app
 
-COPY --from=builder /app/next.config.js ./
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/static ./.next/static
-COPY --from=builder /app/.next/standalone ./
+COPY --from=prod-builder /app/next.config.js ./
+COPY --from=prod-builder /app/public ./public
+COPY --from=prod-builder /app/.next/static ./.next/static
+COPY --from=prod-builder /app/.next/standalone ./
 
 EXPOSE 3000
 
